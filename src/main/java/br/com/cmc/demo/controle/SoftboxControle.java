@@ -4,6 +4,7 @@ import br.com.cmc.demo.modelo.SoftBox;
 import br.com.cmc.demo.repositorio.SoftBoxRepositorio;
 import br.com.cmc.demo.servico.SoftboxServico;
 
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +71,10 @@ public class SoftboxControle {
     @GetMapping("/listar")
 	public String listarSB(Model model) {
 		List<SoftBox> sBs = sbRepositorio.findAll();
+		
+		// Ordena a lista colocando "nao-lido" primeiro
+        sBs.sort(Comparator.comparing(softBox -> softBox.getStatus().equalsIgnoreCase("lido")));
+        
 		model.addAttribute("listaSB", sBs);
 		return "/auth/admin/lista-softbox";
 	}
