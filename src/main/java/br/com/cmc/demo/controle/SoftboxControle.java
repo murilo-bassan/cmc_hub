@@ -30,7 +30,7 @@ public class SoftboxControle {
     @GetMapping("/novo")
     public String softbox(Model model) {
         SoftBox softbox = new SoftBox();
-        softbox.setStatus("nao-lida");
+        softbox.setStatus("nao-lido");
         model.addAttribute("novoSB", softbox);
         return "/auth/user/novo-softbox";
     }
