@@ -139,6 +139,7 @@
             <th>Nome da Empresa</th>
             <th>Descrição</th>
             <th>Status</th>
+            <th>Contato</th>
             <th>Ação</th> 
           </tr>
         </thead>
@@ -156,6 +157,7 @@
             <td th:text="${softBox.nomeEmpresa}"></td>
             <td th:text="${softBox.descricaoSB}"></td>
             <td th:text="${softBox.status}"></td>
+            <td th:text="${softBox.telefoneEmpresa}"></td>
             <td class="action-icons">
               <!-- Formulário para atualizar o status -->
               <form th:action="@{/softbox/atualizar-status}" method="post" style="display: inline-block;">
