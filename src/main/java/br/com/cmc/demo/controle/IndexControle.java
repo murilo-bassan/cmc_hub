@@ -13,4 +13,10 @@ public class IndexControle {
 	
 		return "/auth/user/home";
     }
+	
+	@GetMapping("/login")
+    public String Login(){	
+	
+		return "/auth/login";
+    }
 }
