@@ -1,7 +1,5 @@
 package br.com.cmc.demo.modelo;
 
-import br.com.cmc.demo.validation.groups.NotBlankGroup;
-import br.com.cmc.demo.validation.groups.OtherValidationsGroup;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
