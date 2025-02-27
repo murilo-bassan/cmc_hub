@@ -102,7 +102,7 @@
 
     <div class="container-form">
       <div class="form-container">
-        <h2>Login</h2>
+        <h2>Cadastro</h2>
 
         <!-- Exibindo mensagem de sucesso após cadastro -->
         <div class="alert alert-primary alert-dismissible fade show" th:if="${mensagemLogin}">
@@ -111,11 +111,44 @@
         </div>
 
         <!-- Formulário de envio -->
-        <form th:action="#" th:object="${#}" method="post" enctype="multipart/form-data">
+        <form th:action="@{/salvar}" th:object="${novoUser}" method="post" enctype="multipart/form-data">
+			
+		  <div class="row mb-3">
+            <label for="nome">Nome:</label>
+            <input class="form-control" type="text" id="nome" th:field="*{nome}">
+            
+            <!-- Exibe a mensagem específica se o campo estiver em branco -->
+            <span class="mensagem bg-secondary text-white" th:if="${#fields.hasErrors('nome') and #fields.errors('nome').size() == 0}" th:text="'Nome é obrigatório'"></span>
 
+            <!-- Exibe as mensagens de erro se o campo contiver valor e houver erro -->
+            <span class="mensagem bg-secondary text-white" th:if="${#fields.hasErrors('nome') and #fields.errors('nome').size() > 0}" th:errors="*{nome}"></span>
+          </div>	
+		  
+		  <div class="row mb-3">
+            <label for="cpf">CPF:</label>
+            <input class="form-control" type="text" id="cpf" th:field="*{cpf}">
+            
+            <!-- Exibe a mensagem específica se o campo estiver em branco -->
+            <span class="mensagem bg-secondary text-white" th:if="${#fields.hasErrors('cpf') and #fields.errors('cpf').size() == 0}" th:text="'CPF é obrigatório'"></span>
+
+            <!-- Exibe as mensagens de erro se o campo contiver valor e houver erro -->
+            <span class="mensagem bg-secondary text-white" th:if="${#fields.hasErrors('cpf') and #fields.errors('cpf').size() > 0}" th:errors="*{cpf}"></span>
+          </div>
+		  
+		  <div class="row mb-3">
+            <label for="email">Email:</label>
+            <input class="form-control" type="text" id="email" th:field="*{email}">
+            
+            <!-- Exibe a mensagem específica se o campo estiver em branco -->
+            <span class="mensagem bg-secondary text-white" th:if="${#fields.hasErrors('email') and #fields.errors('email').size() == 0}" th:text="'Email é obrigatório'"></span>
+
+            <!-- Exibe as mensagens de erro se o campo contiver valor e houver erro -->
+            <span class="mensagem bg-secondary text-white" th:if="${#fields.hasErrors('email') and #fields.errors('email').size() > 0}" th:errors="*{email}"></span>
+          </div>
+		  	
           <!-- Login -->
           <div class="row mb-3">
-            <label for="login">Login:</label>
+            <label for="login">Username:</label>
             <input class="form-control" type="text" id="login" th:field="*{login}">
             
             <!-- Exibe a mensagem específica se o campo estiver em branco -->
@@ -136,6 +169,9 @@
             <!-- Exibe as mensagens de erro se o campo contiver valor e houver erro -->
             <span class="mensagem bg-secondary text-white" th:if="${#fields.hasErrors('senha') and #fields.errors('senha').size() > 0}" th:errors="*{senha}"></span>
           </div>
+          
+          <!-- Status da Ideia (campo oculto com o valor atualizado) -->
+		  <input type="hidden" th:field="*{ativo}" />
 
           <!-- Botão de envio -->
           <input class="btn btn-custom" type="submit" value="Enviar" />
