@@ -1,8 +1,8 @@
 package br.com.cmc.demo.controle;
 
-import java.util.Comparator;
 import java.util.List;
 
+import org.apache.el.stream.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,12 +11,12 @@ import org.springframework.validation.annotation.Validated;
 //import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.cmc.demo.modelo.Feedback;
-import br.com.cmc.demo.modelo.SoftBox;
 import br.com.cmc.demo.modelo.Usuario;
+import br.com.cmc.demo.repositorio.PapelRepositorio;
 import br.com.cmc.demo.repositorio.UsuarioRepositorio;
 
 
@@ -25,6 +25,9 @@ public class IndexControle {
 	
 	@Autowired
 	UsuarioRepositorio usRepositorio;
+	
+	@Autowired
+	PapelRepositorio papelRepositorio;
 
 	@GetMapping("/")
     public String pagInicial(){	
@@ -58,7 +61,27 @@ public class IndexControle {
 	public String listarFB(Model model) {
 		List<Usuario> Uss = usRepositorio.findAll();
         
-		model.addAttribute("listaUS", Uss);
+		model.addAttribute("listaUSR", Uss);
 		return "/auth/admin/lista-usuario";
 	}
+	
+	@GetMapping("/apagar/{id}")
+	public String apagarSB(@PathVariable("id") long id, Model model) {
+		Usuario us = usRepositorio.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("Id inválido:" + id));
+		usRepositorio.delete(us);
+		return "redirect:/listar";
+	}
+	
+	@GetMapping("/editarPapel/{id}")
+	public String selecionarPapel(@PathVariable("id") long id, Model model) {
+	    Usuario usuario = usRepositorio.findById(id)
+	        .orElseThrow(() -> new IllegalArgumentException("Usuário inválido: " + id));
+
+	    model.addAttribute("usuario", usuario);
+	    model.addAttribute("listaPapeis", papelRepositorio.findAll());
+
+	    return "/auth/admin/editar-papel";
+	}
+
 }
