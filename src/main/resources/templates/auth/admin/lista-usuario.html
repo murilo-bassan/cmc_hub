@@ -143,7 +143,8 @@
             <td th:text="${usr.email}"></td>
             <td th:text="${usr.login}"></td>
             <!--<td th:text="{usr.papel}"></td>-->
-            <td th:text="${usr.ativo}"></td>
+            <td th:text="${usr.ativo == true} ? 'Ativo' : 'Não Ativo'"></td>
+
             <td class="action-icons">
               <!-- Ícone de apagar Feedback -->
               <a title="Apagar Usuário" class="fa-regular fa-trash-can icon-dark btn-delete" 
