@@ -2,7 +2,6 @@ package br.com.cmc.demo.controle;
 
 import br.com.cmc.demo.modelo.SoftBox;
 import br.com.cmc.demo.repositorio.SoftBoxRepositorio;
-import br.com.cmc.demo.servico.SoftboxServico;
 
 import java.util.Comparator;
 import java.util.List;
